@@ -38,6 +38,8 @@ public:
     void vaciar();
 
     void moverultimo(int pos);
+
+    void moverPri (T dato);
 };
 
 
@@ -293,6 +295,39 @@ void Lista<T>::moverultimo( int pos) //si lo dejo en funcion insertar, tardaria 
     aux->setSiguiente(amover); /** seteo al siguiente del aux que apuntaba al null ahora lo hago apuntar a amover*/
 
 
+}
+<T>
+void Lista <T>::moverPri (Tdato){
+    Nodo <T> *aux =inicio *aMover;  //tengfo 3 etiquetas
+    //si la lista esta vacia
+    if (aux== nullptr) throw 404;
+
+    //si el dao ya esta en primer lugar
+    if(aux->getDato() == dato)
+        return;
+
+    while (aux->getSiguiente() != nullptr && aux-> getSiguiente()-> getDato() != dato){
+        aux=aux->getSiguiente();
+    }
+    if (aux->getSiguiente() == nullptr){
+        throw 404;
+    }
+    aMover= aux->getSiguiente();
+    aux->setSiguiente(aMover->getSiguiente())
+
+    aMover->setSiguiente(inicio);
+
+    inicio=aMover;
+
+}
+void Lista <T>::print (){
+    Nodo <T> *aux =inicio;
+
+    while (aux != nullptr){
+        std:: cout<< aux->getDato << "->";
+        aux=aux->setSiguiente();
+    }
+    std:: cout<<"NULL"<<std ::endl;
 }
 
 #endif //LISTA_H
