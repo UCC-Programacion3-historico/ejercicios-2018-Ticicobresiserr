@@ -1,18 +1,19 @@
-#ifndef HASHMAP_H
-#define HASHMAP_H
+#ifndef ARBOLBINARIO_H
+#define ARBOLBINARIO_H
 
 #include "NodoArbol.h"
 
 template<class T>
 class ArbolBinario {
 private:
+    NodoArbol<T> *raiz;
 
 public:
     ArbolBinario();
 
     void put(T dato);
 
-    T search(T dato);
+    T search(T dato); //porej, tengo en un nodo una case auto con mil atributos, ingreso en x dato de esos atributos y me los devuleve a todos completos.
 
     void remove(T dato);
 
@@ -28,6 +29,13 @@ public:
 
     void print();
 
+private: //por que no quiero mostrarle los nodos al usuario
+    NodoArbol<T> * put(T dato,NodoArbol<T> *r );
+    T search(T dato, NodoArbol<T> *r);
+    void preorder(NodoArbol<T> *r);
+    void inorder(NodoArbol<T> *r);
+    void posorder(NodoArbol<T> *r);
+
 };
 
 
@@ -38,7 +46,7 @@ public:
  */
 template<class T>
 ArbolBinario<T>::ArbolBinario() {
-
+    raiz= nullptr;
 }
 
 
@@ -59,8 +67,7 @@ ArbolBinario<T>::~ArbolBinario() {
  */
 template<class T>
 T ArbolBinario<T>::search(T dato) {
-    T temp;
-    return temp;
+    return search(dato, raiz);
 }
 
 
@@ -71,7 +78,62 @@ T ArbolBinario<T>::search(T dato) {
  */
 template<class T>
 void ArbolBinario<T>::put(T dato) {
+     raiz= put(dato, raiz);
+}
+template<class T>
+NodoArbol<T> * ArbolBinario<T>::put(T dato,NodoArbol<T> *r ){
+    //estoy haciendo recursividad hasta un nodo nulo
+    //si llego al  ult nodo y no tiene hijo creo nuevo nodo
+    if (r== nullptr) {
+        return new NodoArbol <T> (dato);          //1!* y crea el nodo
 
+    }
+    if( r->getDato() ==dato){ //no puedo tener datos iguales
+        throw 200;  //lo encontre
+    }
+
+    if( r->getDato() > dato) {
+
+        r->setIzq (put(dato, r->getIzq()));}  //ve que la raiz no tiene un nodo a la izq con put() tal que sube a 1!*
+    else
+            {
+                r->setDer(put(dato, r->getDer()));}
+                return r;  //en la recursividad se retorna la raiz a si mismo, entonces la recursividad sigue con la sig raiz
+    }
+
+
+        //dato raiz es mayor que el que insete
+        /*if (r->getIzq() == nullptr) {  //si a la izq no tengo nodo, lo creo
+            r->setIzq(new NodoArbol<T>(dato));
+        } else //existe el nodo
+        {
+            put(dato, r->getIzq())
+        }
+    }
+    else{
+            if (r->getDer() == nullptr){  //si a la izq no tengo nodo, lo creo
+                r->setDer(new NodoArbol <T> (dato));
+            }
+            else //existe el nodo
+            {
+                put(dato, r->getDer())
+            }
+    }
+
+    }*/
+
+template<class T>
+T ArbolBinario<T>::search(T dato,NodoArbol<T> *r ) { //es recursiva
+    if(r== nullptr){
+        throw 404;
+    }
+    if( r->getDato() ==dato){
+        return r->getDato();
+    }
+            if( r->getDato() >dato)
+                return search(dato, r->getIzq());
+            else
+                return search(dato, r->getDer());
 }
 
 
@@ -91,7 +153,7 @@ void ArbolBinario<T>::remove(T dato) {
  */
 template<class T>
 bool ArbolBinario<T>::esVacio() {
-    return false;
+    return r== nullptr;
 }
 
 
@@ -100,10 +162,41 @@ bool ArbolBinario<T>::esVacio() {
  */
 template<class T>
 void ArbolBinario<T>::preorder() {
+    preorder(raiz);
+
 
 }
 
+void ArbolBinario<T>::preorder(NodoArbol<T> *r){
+    if (r== nullptr){
+        return;
 
+    std:: cout<< r->getDato()<<" ";
+    preorder(r->getIzq());
+    preorder(r->getDer())
+
+    }
+}
+void ArbolBinario<T>::inorder(NodoArbol<T> *r){
+    if (r== nullptr){
+        return;
+
+        inorder(r->getIzq());
+        std:: cout<< r->getDato()<<" ";
+        inorder(r->getDer())
+
+    }
+}
+void ArbolBinario<T>::posorder(NodoArbol<T> *r){
+    if (r== nullptr){
+        return;
+
+        std:: cout<< r->getDato()<<" ";
+        posorder(r->getIzq());
+        posorder(r->getDer())
+
+    }
+}
 /**
  * Recorre un árbol en orden
  */
