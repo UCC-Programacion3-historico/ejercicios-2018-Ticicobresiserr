@@ -28,7 +28,7 @@ lista enlazada que es la unión de las otras dos.
 Escriba la clase CircList para implementar una lista circular
 
 
-##    Ejercicio N°6. 
+##    Ejercicio N°6.    LISTO
 Agregue el método: insertAfter2(int oldValue, int n, int newValue) que inserte un nodo
 con el valor newValue después de la enésima ocurrencia de oldValue.
  ( 3,2,7,busco el valor numero 3, busco la ocurrencia num dos, segundo nodo en el que se encuentre un 3 y lo cambio

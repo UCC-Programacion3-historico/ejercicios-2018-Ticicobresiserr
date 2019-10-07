@@ -1,5 +1,5 @@
 
-add_executable(U01-E01 Ej-01/main.cpp Ej-01/potencia.cpp)
+add_executable(U01-E01 Ej-01/main.cpp)
 
 add_executable(U01-E02 Ej-02/main.cpp Ej-02/sumatoria.cpp)
 

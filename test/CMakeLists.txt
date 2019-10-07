@@ -13,7 +13,7 @@ add_executable(run_test
         U00_Repaso/Ej06.cpp
 
 
-        U01_Recursividad/Ej01.cpp ../U01_Recursividad/Ej-01/potencia.cpp
+        U01_Recursividad/Ej01.cpp
         U01_Recursividad/Ej02.cpp ../U01_Recursividad/Ej-02/sumatoria.cpp
         U01_Recursividad/Ej03.cpp ../U01_Recursividad/Ej-03/ackerman.cpp
         U01_Recursividad/Ej04.cpp ../U01_Recursividad/Ej-04/mcd.cpp

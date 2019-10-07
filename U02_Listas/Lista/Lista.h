@@ -60,7 +60,9 @@ Lista<T>::Lista() {
  * @param li
  */
 template<class T>
-Lista<T>::Lista(const Lista<T> &li) {}
+Lista<T>::Lista(const Lista<T> &li) {
+    inicio=li.inicio;
+}
 
 
 /**
@@ -107,13 +109,14 @@ int Lista<T>::getTamanio() {
  * @tparam T
  * @param pos lugar donde será insertado el dato
  * @param dato  dato a insertar
- */
+ *
+ * agrago nodos!!!*/
 template<class T>
 void Lista<T>::insertar(unsigned int pos, T dato) {/*funcion mas imortante, lleno de datos*/
     int posicion=0;
     nodo<T> *aux=inicio, *nuevo;
     /*en listas el primero y el ultimo elemento se tratan distintos, y verificar si esta vacia*/
-    if (pos==0){   /*para la posicion 1*/
+    if (pos==0){   //para ingresar en la posicion 1
         nuevo= new nodo<T>;
         nuevo->setDato(dato);
         nuevo->setSiguiente(inicio);
@@ -168,8 +171,8 @@ void Lista<T>::insertarUltimo(T dato) { /**hago esta funcion aca para mejorar re
     }
     nuevo= new nodo<T>;
     nuevo->setDato(dato);
-    nuevo->setSiguiente(inicio);
-    inicio=nuevo;
+    nuevo->setSiguiente(inicio);// de aux?
+    inicio=nuevo;   //aux==nuevo?
     return;
 
 }
@@ -193,7 +196,7 @@ void Lista<T>::remover(int pos) {
     if (aux== nullptr) {
         throw 404;
     }
-    if (posActual==0){
+    if (pos==0){
         inicio = inicio->getSiguiente();
         delete aux;
         return;
@@ -204,7 +207,6 @@ void Lista<T>::remover(int pos) {
     delete aborrar;
 
 }
-
 
 /**
  * Obtener el dato del nodo en la posicion pos
@@ -328,6 +330,40 @@ void Lista <T>::print (){
         aux=aux->setSiguiente();
     }
     std:: cout<<"NULL"<<std ::endl;
+}
+//parte tipo parcial
+plantilla < clase  T >
+void Lista <T> :: moverUlt (int pos) {
+    nodo <T> * aux = inicio  , *amover;
+    int posAct=0;
+
+    while (aux != nullptr && posAct < pos-1)  //nos quedamos en el anterior al que queremos mover
+    {
+        aux = aux-> getSiguiente ();
+        posAct++;
+    }
+    if (aux 1= nullptr){       //ya sali del bucle anterior
+        trow 404;
+    }
+
+    if (pos==0){
+        amover=inicio;
+        inicio= inicio->getSiguiente();
+        aux=inicio;
+    }
+    else{
+        amover= aux-> getSiguiente ();
+        aux-> setSiguiente (amover->getSiguiente());
+    }
+
+    amover-> setSiguiente(nullptr);
+
+    while (aux-> getSiguiente () != nullptr )
+    {
+        aux = aux-> getSiguiente (); //lego al ultimo nodo de la lista
+    }
+
+    aux-> setSiguiente(amover);
 }
 
 #endif //LISTA_H

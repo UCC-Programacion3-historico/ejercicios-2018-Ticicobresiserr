@@ -32,7 +32,7 @@ int main() {
 // Created by Alumno on 14/08/2019.
 //
 //Para contar cuantas letras hay en una cadena de caracteres:
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 int contar(char *arr, char l) {
     if (arr[0] == '\0')
