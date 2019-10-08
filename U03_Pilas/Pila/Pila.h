@@ -11,7 +11,7 @@ template<class T>
 class Pila {
 private:
 
-
+    Nodo<T> *tope;
 public:
     Pila();
 
@@ -32,7 +32,9 @@ public:
  * @tparam T
  */
 template<class T>
-Pila<T>::Pila() {}
+Pila<T>::Pila() {
+    tope= nullptr;
+}
 
 
 /**
@@ -59,7 +61,7 @@ void Pila<T>::push(T dato) {
     nuevo= new nodo<T>;
     nuevo -> setDato(dato);
     nuevo -> setSiguiente(tope);     //tope sera mi inicio
-    tope=nuevo;
+    tope = nuevo;
 }
 
 
@@ -72,8 +74,8 @@ template<class T>
 T Pila<T>::pop() {
 
     nodo <T> *aborrar= tope;       //guardo tope en un nodo nuevo variable nueva
-    if (tope != nullptr){
-        trow 404;
+    if (tope == nullptr){
+        throw 404;
     }
     T dato= tope->getDato();
     tope= tope->getSiguiente();     //tope ahora apunta al siguiente del tope antrerior
@@ -93,9 +95,9 @@ bool Pila<T>::esVacia() {
 }
 
 template<class T>
-bool Pila<T>::peek() {
+T Pila<T>::peek() {
     if (tope == nullptr)
-        trow 404;
+        throw 404;
     return tope -> getDato();
 }
 

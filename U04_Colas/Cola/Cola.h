@@ -9,8 +9,8 @@
 template<class T>
 class Cola {
 private:
-    T dato;
-    Nodo <T> *nuevo;
+
+    Nodo<T> *frente, *fondo;
 
 public:
     Cola();
@@ -23,7 +23,7 @@ public:
 
     bool esVacia();
 
-    T Cola<T>::peek();
+    T peek();
 };
 
 
@@ -46,6 +46,8 @@ Cola<T>::Cola() {
 template<class T>
 Cola<T>::~Cola() {
 
+    while (!esVacia())
+        desencolar();
 }
 
 
@@ -56,7 +58,8 @@ Cola<T>::~Cola() {
  */
 template<class T>
 void Cola<T>::encolar(T dato) {
-    auto *nuevo=new Nodo <T> (); //asigna el tipo que va a ser nuevo automaticamente. si tengo nodo en el segundo miembro lo guarda como dato t, si tengo int crea nuevo tipo int
+    auto *nuevo=new Nodo <T> (); //asigna el tipo que va a ser nuevo automaticamente.
+                                 // si tengo nodo en el segundo miembro lo guarda como dato t, si tengo int crea nuevo tipo int
     nuevo->setDato(dato);
     nuevo->setSiguiente (nullptr);
 
