@@ -1,6 +1,7 @@
 #ifndef ARBOLBINARIO_H
 #define ARBOLBINARIO_H
 
+#include <opencl-c.h>
 #include "NodoArbol.h"
 
 template<class T>
@@ -30,11 +31,20 @@ public:
     void print();
 
 private: //por que no quiero mostrarle los nodos al usuario
-    NodoArbol<T> * put(T dato,NodoArbol<T> *r );
+
+    NodoArbol<T> *put(T dato,NodoArbol<T> *r );
+
     T search(T dato, NodoArbol<T> *r);
+
     void preorder(NodoArbol<T> *r);
+
     void inorder(NodoArbol<T> *r);
+
     void posorder(NodoArbol<T> *r);
+
+    NodoArbol<T> * remover(T dato, NodoArbol<T> *r);
+
+    NodoArbol<T> *  ArbolBinario<T>::Buscarmax(T dato, NodoArbol<T> *r);
 
 };
 
@@ -137,14 +147,89 @@ T ArbolBinario<T>::search(T dato,NodoArbol<T> *r ) { //es recursiva
 }
 
 
+template<class T>
+void ArbolBinario<T>::remove(T dato) {
+    raiz=remover(T dato,NodoArbol<T> *r );
+}
 /**
  * Elimina un dato del árbol
  * @param clave Clave para identificar el nodo a borrar
  */
 template<class T>
-void ArbolBinario<T>::remove(T dato) {
+NodoArbol<T> *  ArbolBinario<T>::remove(T dato, NodoArbol<T> *r) {
+
+    NodoArbol<T> *aux;
+
+    if(r== nullptr){
+        throw 404;
+    }
+    if( r->getDato() ==dato){
+        //borrar
+        if(r->getIzq()== nullptr && r->getDer() == nullptr){
+            delete r;
+            return nullptr; //ese nodo no existe mas
+        }
+
+        else if(r->getIzq()== nullptr && r->getDer() != nullptr){  //en el caso de que no tenga uno de  los dos hijos
+            aux= r->getDer();
+            delete r;
+            return aux;
+        }
+        else if(r->getIzq()!= nullptr && r->getDer() == nullptr){  //en el caso de que no tenga uno de los dos hijos
+            aux= r->getIzq();
+            delete r;
+            return aux;
+        }
+        else if(r->getIzq()!= nullptr && r->getDer() != nullptr){
+            bool enc;
+
+            if(r->getIzq()->getDer()!= nullptr){
+
+                aux= Buscarmax(r->getIzq(), &enc);
+                aux= setDer(r->getDer());
+                aux= setIzq(r->getIzq());
+            }
+            else{
+                aux=r->getIzq()
+                r->getIzq()->getDer(r->getDer());
+            }
+        }
+            delete r;
+            return aux;
+
+        }
+
+        else if( r->getDato() >dato){
+        r->setIzq(remover(dato, r->getIzq())     );//ahora retorna un puntero en la recursividad
+        //pongo como hijo izq el puntero que me devuelve la recursividad
+
+    }
+    else ( r->getDato() <dato){
+        r->setDer(remover(dato, r->getDer()));
+    }
+    return r;
 
 }
+template<class T>
+NodoArbol<T> *  ArbolBinario<T>::Buscarmax(NodoArbol<T> *r, bool *encontre ) {  //remover llamo a partir del que quiero borrar
+
+        NodoArbol<T> *ret;
+        *encontre=false;
+
+        if(r->getDer()== nullptr){   //quiere decir que es el maximo
+            *encontre=true;
+            return r;
+        }
+
+        ret= return Buscarmax(r->getDer(), encontre);
+        if (*encontre){
+
+            r->setDer(nullptr);  //seteo el anterior a mi maximo a nullptr
+            *encontre= false;
+        }
+
+        return ret;
+    }
 
 
 /**
@@ -163,20 +248,35 @@ bool ArbolBinario<T>::esVacio() {
 template<class T>
 void ArbolBinario<T>::preorder() {
     preorder(raiz);
+}
 
+/**
+ * Recorre un árbol en orden
+ */
+template<class T>
+void ArbolBinario<T>::inorder() {
 
 }
 
+/**
+ * Recorre un árbol en postorden
+ */
+template<class T>
+void ArbolBinario<T>::postorder() {
+
+}
+template<class T>
 void ArbolBinario<T>::preorder(NodoArbol<T> *r){
     if (r== nullptr){
         return;
 
-    std:: cout<< r->getDato()<<" ";
-    preorder(r->getIzq());
-    preorder(r->getDer())
+        std:: cout<< r->getDato()<<" ";
+        preorder(r->getIzq());
+        preorder(r->getDer())
 
     }
 }
+template<class T>
 void ArbolBinario<T>::inorder(NodoArbol<T> *r){
     if (r== nullptr){
         return;
@@ -187,6 +287,7 @@ void ArbolBinario<T>::inorder(NodoArbol<T> *r){
 
     }
 }
+template<class T>
 void ArbolBinario<T>::posorder(NodoArbol<T> *r){
     if (r== nullptr){
         return;
@@ -197,23 +298,6 @@ void ArbolBinario<T>::posorder(NodoArbol<T> *r){
 
     }
 }
-/**
- * Recorre un árbol en orden
- */
-template<class T>
-void ArbolBinario<T>::inorder() {
-
-}
-
-
-/**
- * Recorre un árbol en postorden
- */
-template<class T>
-void ArbolBinario<T>::postorder() {
-
-}
-
 
 /**
  * Muestra un árbol por consola
@@ -222,6 +306,7 @@ template<class T>
 void ArbolBinario<T>::print() {
 
 }
+
 
 
 #endif //HASHMAP_H

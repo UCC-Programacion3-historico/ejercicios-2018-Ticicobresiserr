@@ -40,6 +40,12 @@ public:
     void moverultimo(int pos);
 
     void moverPri (T dato);
+    //extras
+
+    void moverult (int pos);
+    int sumavalor(int umbral);
+    void alfinal (T dato);
+
 };
 
 
@@ -322,6 +328,7 @@ void Lista <T>::moverPri (Tdato){
     inicio=aMover;
 
 }
+template <class T>
 void Lista <T>::print (){
     Nodo <T> *aux =inicio;
 
@@ -332,7 +339,7 @@ void Lista <T>::print (){
     std:: cout<<"NULL"<<std ::endl;
 }
 //parte tipo parcial
-plantilla < clase  T >
+template <class T>
 void Lista <T> :: moverUlt (int pos) {
     nodo <T> * aux = inicio  , *amover;
     int posAct=0;

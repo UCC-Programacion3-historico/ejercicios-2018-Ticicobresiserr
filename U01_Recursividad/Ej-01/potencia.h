@@ -12,3 +12,5 @@ elevando a la potencia menos uno.
 3<sup>2</sup>=3*(3<sup>1</sup>)=3*[3*(3<sup>0</sup>)]=3*(3*1)=9*/
 
 unsigned int potencia(unsigned int base, unsigned int exp);
+
+#endif

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(Programacion3)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 # Agrego todos los test.
 add_subdirectory(test)
@@ -15,3 +15,7 @@ add_subdirectory(U06_Hash)
 add_subdirectory(U07_Grafos)
 add_subdirectory(U08_Ordenamiento)
 add_subdirectory(U09_Busqueda)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -gdwarf-3")
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -gdwarf-3")

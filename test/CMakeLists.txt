@@ -5,12 +5,12 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 add_executable(run_test
 
-        U00_Repaso/Ej01.cpp
-        U00_Repaso/Ej02.cpp
-        U00_Repaso/Ej03.cpp
-        U00_Repaso/Ej04.cpp
-        U00_Repaso/Ej05.cpp
-        U00_Repaso/Ej06.cpp
+#        U00_Repaso/Ej01.cpp
+#        U00_Repaso/Ej02.cpp
+#        U00_Repaso/Ej03.cpp
+#        U00_Repaso/Ej04.cpp
+#        U00_Repaso/Ej05.cpp
+#        U00_Repaso/Ej06.cpp
 
 
         U01_Recursividad/Ej01.cpp

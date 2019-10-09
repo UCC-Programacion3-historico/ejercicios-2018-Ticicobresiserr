@@ -10,15 +10,15 @@ elevando a la potencia menos uno.
 
 3<sup>2</sup>=3*(3<sup>1</sup>)=3*[3*(3<sup>0</sup>)]=3*(3*1)=9*/
 
-{unsigned int potencia(unsigned int base, unsigned int exp) {
+unsigned int potencia(unsigned int base, unsigned int exp) {
     if (exp == 0)
         return 1;
     else
         return base * potencia(base, exp - 1);
 }
-}
+
 
 int main() {
-    std::cout << potencia(5, 0) << std::endl;
+    std::cout << potencia(5, 5) << std::endl;
     return 0;
 }

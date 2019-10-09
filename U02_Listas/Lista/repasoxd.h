@@ -7,6 +7,8 @@
 
 #endif //PROGRAMACION3_REPASOXD_H
 
+#include "Lista.h"
+#include "nodo.h"
 //para una lista enlazada creo metodo que sea moverultimo(int pos);
 
 void Lista <T> moverult( int pos){
@@ -31,16 +33,19 @@ void Lista <T> moverult( int pos){
 int Lista<T>::sumavalor( int umbral){
     Nodo <T> *aux=inicio;
     int cant=0;
+
+    if (aux== nullptr){throw 404;}
+
     while(aux!= nullptr){
         if(aux->getdato()>umbral){
         cant=cant+aux->getdato;}
     aux=aux->getsig();
     }
-    if (aux== nullptr) throw 404;
+    return  cant;
 }
 
 //recibe como parametro un dato, lo busca  y mueve a la ult posicion
-
+template <class T>
 void Lista <T> alfinal(T dato){
 
     Nodo <T> *aux=inicio ,*amover=inicio , *final=inicio   ;
