@@ -2,6 +2,7 @@
 #define LISTA_H
 
 #include "nodo.h"
+
 /**
  * Clase que implementa una Pila generica, ya que puede
  * almacenar cualquier tipo de dato T
@@ -10,12 +11,13 @@
 template<class T>
 class Pila {
 private:
-
-
+    Nodo<T> *tope;
 public:
     Pila();
 
     ~Pila();
+
+    //Pila(const Pila<T>&p);
 
     void push(T dato);
 
@@ -24,6 +26,10 @@ public:
     T peek();
 
     bool esVacia();
+
+    //extras
+    int sonIguales(Pila<T> a, Pila<T> b);
+
 };
 
 
@@ -32,7 +38,9 @@ public:
  * @tparam T
  */
 template<class T>
-Pila<T>::Pila() {}
+Pila<T>::Pila() {
+    tope = nullptr;
+}
 
 
 /**
@@ -41,10 +49,13 @@ Pila<T>::Pila() {}
  * @tparam T
  */
 template<class T>
-Pila<T>::~Pila() { //destruir cada nodo de la pila
+Pila<T>::~Pila() {
     while (tope != nullptr)
         pop();
 }
+
+//template<class T>
+//Pila<T>::Pila(const Pila<T>&p):Pila(p.Pila){}
 
 
 /**
@@ -55,11 +66,11 @@ Pila<T>::~Pila() { //destruir cada nodo de la pila
 template<class T>
 void Pila<T>::push(T dato) {
 
-    nodo<T> *nuevo;
-    nuevo= new nodo<T>;
-    nuevo -> setDato(dato);
-    nuevo -> setSiguiente(tope);     //tope sera mi inicio
-    tope=nuevo;
+    Nodo<T> *nuevo;
+    nuevo = new Nodo<T>;
+    nuevo->setDato(dato);
+    nuevo->setSiguiente(tope);
+    tope = nuevo;
 }
 
 
@@ -70,15 +81,23 @@ void Pila<T>::push(T dato) {
  */
 template<class T>
 T Pila<T>::pop() {
+    T dato;
+    Nodo<T> *aBorrar = tope;
 
-    nodo <T> *aborrar= tope;       //guardo tope en un nodo nuevo variable nueva
-    if (tope != nullptr){
-        trow 404;
-    }
-    T dato= tope->getDato();
-    tope= tope->getSiguiente();     //tope ahora apunta al siguiente del tope antrerior
-    delete aborrar;
+    if (tope == nullptr)
+        throw 404;
+
+    dato = tope->getDato();
+    tope = tope->getSiguiente();
+    delete aBorrar;
     return dato;
+}
+
+template<class T>
+T Pila<T>::peek() {
+    if (tope == nullptr)
+        throw 404;
+    return tope->getDato();
 }
 
 /**
@@ -88,15 +107,22 @@ T Pila<T>::pop() {
  */
 template<class T>
 bool Pila<T>::esVacia() {
-    return tope == nullptr; //retorna verdadero o falso
-
+    return tope == nullptr;
 }
 
-template<class T>
-bool Pila<T>::peek() {
-    if (tope == nullptr)
-        trow 404;
-    return tope -> getDato();
+template <class T>
+int sonIguales(Pila<T> a, Pila<T> b)
+{
+    T auxa, auxb;
+    for(int i=0; !a.esVacia() && !b.esVacia() ;i++)
+    {
+        auxa= a.pop();
+        auxb= b.pop();
+        if (auxa != auxb)
+            return false;
+    }
+    return 0;
 }
+
 
 #endif //LISTA_H

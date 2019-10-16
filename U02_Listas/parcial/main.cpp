@@ -1,9 +1,14 @@
+//
+// Created by ticiana cobresi serravalle on 2019-10-13.
+//
+
 #include <iostream>
 #include "../Lista/Lista.h"
-#include "union.h"
+#include "parcial.h"
 
 int main() {
     Lista<int> a, b, *c;
+
 
     a.insertarUltimo(4);
     a.insertarUltimo(9);

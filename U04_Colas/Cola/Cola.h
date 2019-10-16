@@ -1,6 +1,9 @@
 #ifndef COLA_H
 #define COLA_H
-#include
+
+#include "nodo.h"
+#include "../../U03_Pilas/Pila/Pila.h"
+
 /**
  * Clase que implementa una Cola generica, ya que puede
  * almacenar cualquier tipo de dato T
@@ -9,21 +12,24 @@
 template<class T>
 class Cola {
 private:
-    T dato;
-    Nodo <T> *nuevo;
+    Nodo<T> *frente, *fondo;
 
 public:
     Cola();
 
     ~Cola();
 
-    void encolar(T dato); //agrego nodo
+    //Cola (const Cola&);
 
-    T desencolar();   //quito nodo
+    //T funct(Pila<T> &p, Cola<T> &c);
+
+    void encolar(T dato);
+
+    T desencolar();
 
     bool esVacia();
 
-    T Cola<T>::peek();
+    T peek();
 };
 
 
@@ -34,10 +40,10 @@ public:
 template<class T>
 Cola<T>::Cola() {
     frente = nullptr;
-    fondo= nullptr;
+    fondo = nullptr;
 }
 
-
+// live.marku.me
 /**
  * Destructor de la clase Cola, se encarga de liberar la memoria de todos los nodos
  * utilizados en la Cola
@@ -46,7 +52,12 @@ Cola<T>::Cola() {
 template<class T>
 Cola<T>::~Cola() {
 
+    while (!esVacia())
+        desencolar();
+
 }
+//template<class T>
+//Cola<T>::Cola(const Cola<T> &c):Cola(c.Cola){}
 
 
 /**
@@ -56,19 +67,18 @@ Cola<T>::~Cola() {
  */
 template<class T>
 void Cola<T>::encolar(T dato) {
-    auto *nuevo=new Nodo <T> (); //asigna el tipo que va a ser nuevo automaticamente. si tengo nodo en el segundo miembro lo guarda como dato t, si tengo int crea nuevo tipo int
+
+    auto *nuevo = new Nodo<T>();
     nuevo->setDato(dato);
-    nuevo->setSiguiente (nullptr);
+    nuevo->setSiguiente(nullptr);
 
-    if (fondo == nullptr){
-        frente =nuevo;
+    if (fondo == nullptr) {
+        frente = nuevo;
+    } else {
+        fondo->setSiguiente(nuevo);
     }
-    else {
-        fondo->setSiguiente (nuevo);
-    }
 
-    fondo=nuevo;
-
+    fondo = nuevo;
 }
 
 
@@ -79,25 +89,24 @@ void Cola<T>::encolar(T dato) {
  */
 template<class T>
 T Cola<T>::desencolar() {
-    //desencolamos del frente, primero guardo el dato
-
     T aux;
-    Nodo <T> *aBorrar;
+    Nodo<T> *aBorrar;
 
-    if (frente== nullptr){
-        throw 404;//new std::exception("Error");
-    }
-    aux= frente->getDato();
+    if (frente == nullptr)
+        throw 404;
 
-    aBorrar=frente;
-    frente=frente->setSiguiente();
-    //cuando hay un solo nodo hay que actualizar ferente
-    if (frente== nullptr){
-        fondo= nullptr;
+    aux = frente->getDato();
+
+    aBorrar = frente;
+    frente = frente->getSiguiente();
+
+    if (frente == nullptr) {
+        fondo = nullptr;
     }
+
     delete aBorrar;
-    return aux;
 
+    return aux;
 }
 
 /**
@@ -107,16 +116,37 @@ T Cola<T>::desencolar() {
  */
 template<class T>
 bool Cola<T>::esVacia() {
-    return frente== nullptr;
+    return frente == nullptr;
 }
 
-template <class T>
-T Cola<T>::peek(){
-    if (frente== nullptr){
-        throw 404;}
+template<class T>
+T Cola<T>::peek() {
+    if (frente == nullptr)
+        throw 404;
 
     return frente->getDato();
-    
+}
+
+//extras
+/*
+template<class T>
+T Cola<T>::funct(Pila <T> &p, Cola<T> &c) {
+    p=c;
+    while (!p.esVacia()) {
+        return p.pop();
+    }
+}*/
+
+template<class T>
+int sonIguales(Cola<T> a, Cola<T> b){
+
+    T auxa, auxb;
+    while(!a.esVacia() && !b.esVacia()){
+        auxa=a.desencolar();
+        auxb=b.desencolar();
+        if(auxa != auxb) return false;
+    }
+    return true;
 }
 
 #endif //LISTA_H

@@ -4,19 +4,15 @@
 
 //crear una funcion cola que  se invierta
 
-
-#include "../Cola/Cola.h"
 #include <iostream>
+#include "../Cola/Cola.h"
 
 template<class T>
-Cola<T> invertir(Pila<T> c, Cola<T> d){
+void invertir(Pila<T> c, Cola<T> d){
 
     while(!c.esVacia()){
         d.encolar(c.pop());
     }
-
-    return d;
-
 }
 
 using namespace std;
@@ -33,6 +29,9 @@ int main(){
 
     invertir(c,d);
 
+    while(!d.esVacia()){
+        d.desencolar();
+    }
     return 0;
 
 }

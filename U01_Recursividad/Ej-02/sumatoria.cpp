@@ -1,18 +1,32 @@
-#include "sumatoria.h"
+#include <iostream>
 
 using namespace std;
-
-int sumatoria(int *arr, unsigned int size){
-    /*
+/*
 ##  Ejercicio N°2.
 Implemente una función recursiva que, teniendo un array
 ingresado por teclado, me devuelva la suma de todos sus elementos*/
 
-    i==size;
-    if (size ==0)
-        return arr[i];
-    else
-        return arr[i] + sumatoria(*arr, size+1);
+
+int sumatoria(int *arr, int size){
+
+    for (int i = 1; i <= size; ++i) {
+
+        if (size ==0) return 0;
+
+        else return arr[i] + sumatoria(arr, size);
+    }
 }
-#endif //INC_01_RECURSIVIDAD_SUMATORIA_H
+
+
+int main() {
+    std::cout << "Ejercicio 01/02\n" << std::endl;
+    int arr[3];
+    for (int i=1;i<=3;i++){
+        cout<<"arr["<<i<<"]= ";
+        cin>>arr[i];
+    }
+
+    cout <<sumatoria(arr, 3);
+
+    return 0;
 }

@@ -7,3 +7,5 @@ add_executable(U04-E03 Ej-03/main.cpp)
 add_executable(U04-E04  Ej-04/main.cpp)
 
 add_executable(U04-E05 Ej-05/main.cpp)
+
+add_executable(U04-E06 ej-06extras/main.cpp)
